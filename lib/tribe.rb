@@ -4,11 +4,15 @@ class Tribe
   def initialize (options={})
     @name = options[:name]
     @members = options[:members]
-    puts "Tribe:#{@name}\n Heros:#{@members}"
+    puts "Tribe:#{@name}\n Heros:#{@members.map {|member| member.to_s}}"
   end
 
   def to_s
     @name
+  end
+
+  def delete(member)
+    @members.delete(member)
   end
 
   def tribal_council (options={})

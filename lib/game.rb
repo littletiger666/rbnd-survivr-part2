@@ -5,12 +5,12 @@ class Game
   end
 
 
-  def add_tribe (tribe_3)
-    @tribes << tribe_3
+  def add_tribe (tribe)
+    @tribes << tribe
   end
 
   def immunity_challenge
-    Tribe.new
+    @tribes.sample
   end
 
   def clear_tribes
@@ -18,10 +18,19 @@ class Game
   end
 
   def merge (tribe)
-    Tribe.new(name:"merged_tribe", members: (@tribes.first.members + @tribes.last.members).sample(12))
+    merged_tribe = Tribe.new(name:tribe, members: (merged_members))
+    clear_tribes
+    add_tribe(merged_tribe)
+    return @tribes.first
+  end
+
+  def merged_members
+    members = []
+    @tribes.each {|tribe| members << tribe.members.map { |member| member }}
+    return members.flatten!
   end
 
   def individual_immunity_challenge
-    Contestant.new("immunity")
+    merged_members.sample
   end
 end
