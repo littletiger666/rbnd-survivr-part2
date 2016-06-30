@@ -22,16 +22,11 @@ require 'colorizr'
 
 #This is where you will write your code for the three phases
 def phase_one
-  @eliminations = []
   8.times do
     lost_tribe = @borneo.immunity_challenge
     puts "#{lost_tribe} lost!".green
     person = lost_tribe.tribal_council
-    lost_tribe.delete (person)
-    puts "#{person} has been eliminated!".light_yellow
-    @eliminations << person
   end
-  8
 end
 
 def phase_two
@@ -39,11 +34,7 @@ def phase_two
     winner = @borneo.individual_immunity_challenge
     puts "#{winner} is the winner!".blue
     person = @merge_tribe.tribal_council (options={immune: winner})
-    @merge_tribe.delete (person)
-    puts "#{person} has been eliminated!".light_yellow
-    @eliminations << person
   end
-  3
 end
 
 def phase_three
@@ -51,11 +42,9 @@ def phase_three
     winner = @borneo.individual_immunity_challenge
     puts "#{winner} is the winner!".blue
     person = @merge_tribe.tribal_council (options={mmune: winner})
-    @merge_tribe.delete(person)
     @jury.add_member(person)
     puts "#{person} is lost and moved to the jury!".light_yellow
   end
-  7
 end
 
 

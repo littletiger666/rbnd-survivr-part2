@@ -11,12 +11,11 @@ class Tribe
     @name
   end
 
-  def delete(member)
-    @members.delete(member)
-  end
-
   def tribal_council (options={})
-    @members.reject { |member| member == options[:immune] }.sample
+    person = @members.reject { |member| member == options[:immune] }.sample
+    @members.delete (person)
+    puts "#{person} has been eliminated!".light_red
+    return person
   end
 
 end

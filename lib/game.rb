@@ -1,7 +1,7 @@
 class Game
   attr_accessor :tribes
-  def initialize (tribe_1, tribe_2)
-    @tribes = [tribe_1, tribe_2]
+  def initialize *tribes
+    @tribes = tribes
   end
 
 
@@ -25,12 +25,10 @@ class Game
   end
 
   def merged_members
-    members = []
-    @tribes.each {|tribe| members << tribe.members.map { |member| member }}
-    return members.flatten!
+    @tribes.map(&:members).flatten
   end
 
   def individual_immunity_challenge
-    merged_members.sample
+    @tribes.first.members.sample
   end
 end

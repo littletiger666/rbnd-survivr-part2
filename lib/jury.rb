@@ -9,11 +9,11 @@ class Jury
   def cast_votes (finalists)
     @finalists = Hash.new
     finalists.each do |finalist|
-      @finalists[finalist.name] = 0
+      @finalists[finalist] = 0
     end
 
     @members.each do |member|
-      random = finalists.sample.name
+      random = finalists.sample
       puts "#{member} voted for #{random}".green
       @finalists[random] += 1
     end
@@ -21,19 +21,13 @@ class Jury
   end
 
   def report_votes (finalists)
-    finalists.each do |finalist|
-      puts "#{finalist[0]} gets #{finalist[1]} votes!".light_red
-    end
+    finalists.each_pair {|finalist, votes| puts "#{finalist} got #{votes} votes".light_red}
   end
 
   def announce_winner (result)
-    result.each do |vote|
-      if vote[1] >= 4
-        winner = vote[0]
-        puts "The final winner is #{winner}!".magenta
-        return winner
-      end
-    end
+    winner = result.max_by{|finalist, votes| votes}.first
+    puts "The final winner is #{winner}!".magenta
+    return winner
   end
 
 end
