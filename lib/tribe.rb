@@ -4,7 +4,7 @@ class Tribe
   def initialize (options={})
     @name = options[:name]
     @members = options[:members]
-    puts "Tribe:#{@name}\n Heros:#{@members.map {|member| member.to_s}}"
+    puts "Tribe:#{@name}\n Heros:#{@members.map {|member| member.to_s}}".red
   end
 
   def to_s

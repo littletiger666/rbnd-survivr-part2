@@ -14,7 +14,7 @@ class Jury
 
     @members.each do |member|
       random = finalists.sample.name
-      puts "#{member} voted for #{random}"
+      puts "#{member} voted for #{random}".green
       @finalists[random] += 1
     end
     return @finalists
@@ -22,7 +22,7 @@ class Jury
 
   def report_votes (finalists)
     finalists.each do |finalist|
-      puts "#{finalist[0]} gets #{finalist[1]} votes!"
+      puts "#{finalist[0]} gets #{finalist[1]} votes!".light_red
     end
   end
 
@@ -30,7 +30,7 @@ class Jury
     result.each do |vote|
       if vote[1] >= 4
         winner = vote[0]
-        puts "The final winner is #{winner}!"
+        puts "The final winner is #{winner}!".magenta
         return winner
       end
     end

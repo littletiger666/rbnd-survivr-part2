@@ -2,6 +2,8 @@ require_relative "game"
 require_relative "tribe"
 require_relative "contestant"
 require_relative "jury"
+require 'colorizr'
+
 
 #After your tests pass, uncomment this code below
 #=========================================================
@@ -23,10 +25,10 @@ def phase_one
   @eliminations = []
   8.times do
     lost_tribe = @borneo.immunity_challenge
-    puts "#{lost_tribe} lost!"
+    puts "#{lost_tribe} lost!".green
     person = lost_tribe.tribal_council
     lost_tribe.delete (person)
-    puts "#{person} has been eliminated!"
+    puts "#{person} has been eliminated!".light_yellow
     @eliminations << person
   end
   8
@@ -35,10 +37,10 @@ end
 def phase_two
   3.times do
     winner = @borneo.individual_immunity_challenge
-    puts "#{winner} is the winner!"
+    puts "#{winner} is the winner!".blue
     person = @merge_tribe.tribal_council (options={immune: winner})
     @merge_tribe.delete (person)
-    puts "#{person} has been eliminated!"
+    puts "#{person} has been eliminated!".light_yellow
     @eliminations << person
   end
   3
@@ -47,11 +49,11 @@ end
 def phase_three
   7.times do
     winner = @borneo.individual_immunity_challenge
-    puts "#{winner} is the winner!"
+    puts "#{winner} is the winner!".blue
     person = @merge_tribe.tribal_council (options={mmune: winner})
     @merge_tribe.delete(person)
     @jury.add_member(person)
-    puts "#{person} is lost and moved to the jury!"
+    puts "#{person} is lost and moved to the jury!".light_yellow
   end
   7
 end
